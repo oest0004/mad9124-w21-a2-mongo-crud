@@ -1,2 +1,5 @@
 .DS_Store
 node_modules/
+.vscode/settings.json
+sample_data/courses.js
+sample_data/students.js

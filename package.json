@@ -1,19 +1,28 @@
 {
-  "name": "mad9124-w21-a2-mongo-crud",
+  "name": "A2-MONGO-CRUD",
   "version": "0.1.0",
   "description": "",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "keywords": [
-    "MAD9124",
-    "W21"
+    "MAD9124"
   ],
-  "author": "",
+  "author": "Alexander Oestreicher <oest0004@algonquinlive.com",
   "contributors": [
     "Robert McKenney <mckennr@algonquincollege.com>"
   ],
   "license": "ISC",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "debug": "^4.3.3",
+    "express": "^4.17.3",
+    "express-mongo-sanitize": "^2.2.0",
+    "mongoose": "^6.2.4",
+    "morgan": "^1.10.0",
+    "xss": "^1.0.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
+
