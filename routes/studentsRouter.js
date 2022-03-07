@@ -1,7 +1,9 @@
+const debug = require("debug")("A2-MONGO-CRUD:student")
 const express = require("express")
 const router = express.Router()
 const utility = require("../utility")
-const debug = require("debug")("A2-MONGO-CRUD:student")
+const sanitizeMongo = require('express-mongo-sanitize')
+const sanitizeBody = require("../middleware/sanitizeBody")
 const Student = require("../models/Student")
 
 router.get("/", async (req, res) => {
@@ -14,11 +16,8 @@ router.get("/", async (req, res) => {
 })
 
 // POST
-router.post("/", async (req, res) => {
-	let attributes = req.body.data
-	delete attributes._id
-
-	let newStudent = new Student(attributes)
+router.post("/", sanitizeMongo(), sanitizeBody, async (req, res) => {
+	let newStudent = new Student(req.sanitizedBody)
 	await newStudent.save()
 
 	res.status(201).json({
@@ -38,9 +37,9 @@ router.get("/:id", async (req, res) => {
 })
 
 // PATCH
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", sanitizeMongo(), sanitizeBody, async (req, res) => {
 	try {
-		const { _id, ...otherAttributes } = req.body
+		const { _id, ...otherAttributes } = req.sanitizedBody
 		const student = await Student.findByIdAndUpdate(
 			req.params.id,
 			{ _id: req.params.id, ...otherAttributes },
@@ -52,14 +51,15 @@ router.patch("/:id", async (req, res) => {
 		if (!student) throw new Error("Resource not found")
 		res.json({ data: utility.formatResponseData("students", student) })
 	} catch (err) {
+    debug(err)
 		utility.sendResourceNotFound(req, res, "student")
 	}
 })
 
 // PUT
-router.put("/:id", async (req, res) => {
+router.put("/:id", sanitizeMongo(), sanitizeBody, async (req, res) => {
 	try {
-		const { _id, ...otherAttributes } = req.body
+		const { _id, ...otherAttributes } = req.sanitizedBody
 		const student = await Student.findByIdAndUpdate(
 			req.params.id,
 			{ _id: req.params.id, ...otherAttributes },
