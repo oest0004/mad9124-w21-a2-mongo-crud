@@ -30,5 +30,8 @@ const schema = new mongoose.Schema({
     require: false,
     ref: "Student"
   }]
-
 })
+
+const Model = mongoose.model("Course",schema)
+
+module.exports = Model
