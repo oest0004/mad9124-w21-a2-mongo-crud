@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "description": "",
   "main": "app.js",
-  "scripts": {},
+  "scripts": {
+    "start": "NODE_ENV=production PORT=433 node app.js",
+    "dev": "DEBUG=A2-MONGO-CRUD* NODE_ENV=dev PORT=3000 nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "MAD9124"
   ],
