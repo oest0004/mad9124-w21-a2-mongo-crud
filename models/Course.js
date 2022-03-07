@@ -6,11 +6,13 @@ const schema = new mongoose.Schema({
   code: {
     type: String,
     require: true,
+    minlength: 1,
     maxLength: 16
   },
   title: {
     type: String,
     require: true,
+    minlength: 1,
     maxLength: 255
   },
   description: {
@@ -28,5 +30,5 @@ const schema = new mongoose.Schema({
     require: false,
     ref: "Student"
   }]
-  
+
 })
