@@ -79,10 +79,11 @@ router.put("/:id", sanitizeMongo(), sanitizeBody, async (req, res) => {
 // DELETE
 router.delete('/:id', async (req, res) => {
   try {
-    const car = await Student.findByIdAndRemove(req.params.id)
+    const student = await Student.findByIdAndRemove(req.params.id)
     if (!student) throw new Error('Resource not found')
-    res.json({data: utility.formatResponseData(student)})
+    res.json({data: student})
   } catch (err) {
+    debug(err)
     utility.sendResourceNotFound(req, res,"student")
   }
 })
