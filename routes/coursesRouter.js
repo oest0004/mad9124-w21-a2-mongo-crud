@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 
 // POST
 router.post("/", sanitizeMongo(), sanitizeBody, async (req, res) => {
-	let newCourse = new Course(req.sanitizedBody)
+	const newCourse = new Course(req.sanitizedBody)
 	await newCourse.save()
 
 	res.status(201).json({
